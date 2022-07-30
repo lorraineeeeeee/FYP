@@ -1,0 +1,97 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, Rabiatul Adawiyah. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Rabiatul Adawiyah
+ * Student ID: 20021900
+ * Class: FYP
+ * 
+ * 
+ */ -->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Appointment- View Appt</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<script src="/bootstrap/js/bootstrap.js"></script>
+<style>
+.btn-text-center {
+	text-align: center;
+}
+
+.button {
+  background-color: orange;
+  border:2px solid black;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: black; /* Green */
+  color: white;
+}
+
+</style>
+</head>
+<!--View Single Appointment by ID-->
+<body style="background-color: #CCCCFF;">
+	<div th:replace="fragments/header"></div>
+	<div class="container" style="text-align: center;">
+
+		<main>
+			<br>
+
+			<div class="container my-5 pt-5 bg-light"
+				style="height: 600px; border-style: solid;">
+				<p style="font-size: 40px; text-align: center; color: orange;">
+				<!-- Shows Appointment Details -->
+					<b>APPOINTMENT DETAILS</b>
+				</p>
+				<label>Appointment ID:</label>
+				<h3 th:text="${appt.id }"></h3>
+				<label>Date & Time:</label>
+				<h3 th:text="${appt.date}"></h3>
+				<h3 th:text="${appt.timesch.time}"></h3>
+				<label>Location:</label>
+				<h3 th:text="${appt.location}"></h3>
+				<label>Package Details:</label>
+				<h3 th:text="${appt.packages.pname}"></h3>
+				<h3>
+					$<span th:text="${appt.packages.cost}"></span>
+				</h3>
+				
+	<!-- Make Payment for one appointment -->
+ 
+			<form th:action="@{/cart/add/{apptId}(apptId=${appt.id})}"
+				method="post">
+				<button  class="button button:hover" th:if="${appt.status!='Cancelled'} and ${appt.status!='Completed'} and ${appt.paid!='Paid'}"  sec:authorize="hasAnyRole('COUNTERSTAFF','USER')">Make Payment  </button>
+				
+				<!-- View Test Report once come out, If appointment cancelled, unable to view it -->
+				<a th:href=@{/testresults/appt/{id}(id=${appt.id})} class="button button:hover"  th:if="${appt.status!='Cancelled'}">View Test Report</a>
+
+					</form>
+			</div>
+
+
+		
+		</main>
+
+		<div th:replace="fragments/footer"></div>
+	</div>
+</body>
+</html>
+
+
+
+
+

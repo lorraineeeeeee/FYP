@@ -1,0 +1,85 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, Rabiatul Adawiyah. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Rabiatul Adawiyah
+ * Student ID: 20021900
+ * Class: FYP
+ * 
+ * 
+ */ -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CorpHas-View Counter Staff</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<script src="/bootstrap/css/bootstrap.js"></script>
+<style>
+.btn-text-center {
+	text-align: center;
+}
+</style>
+</head>
+<body style="background-color: #FFFACD;">
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+	<br>
+		<main class="btn-text-center">
+			<div class="h1"style= "font-family: 'Georgia', sans-serif;">View Counter Staff</div>
+						<!-- Search function-->
+			<div>
+				<form th:action="@{/cstaff}">
+					Search: <input type="text" name="keyword" th:value="${keyword}"
+						required /> &nbsp; <input class="btn btn-primary" type="submit"
+						value="Search" /> &nbsp; <input class="btn btn-warning"
+						type="button" value="Clear" onclick="clearFilter()" />
+				</form>
+
+				<script type="text/javascript">
+					function clearFilter() {
+						window.location = '/cstaff'; //redirect back to orignal package page
+					}
+				</script>
+			</div>
+			<!-- end Search function-->
+			<br>
+			<div class="alert alert-primary" role="alert" th:text="${success}"
+				th:if="${success}"></div>
+				
+			<!-- Table Header -->
+			<table class="table table-bordered table-hover btn-text-center " style= "font-family: 'Poppins', sans-serif;">
+				<thead class="table-primary">
+					<tr>
+                        <th>ID</th>
+						<th>Counter Number</th>
+						<th>Details</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<!-- Table Data -->
+				<tbody>
+					<tr th:each="counterstaff2 : ${listCounter}" style= "font-family: 'Cambria', sans-serif;">
+					<!-- Show Counter staff details  -->
+					<td th:text="${counterstaff2.id}"></td>
+						<td th:text="${counterstaff2.counterNo}"></td>
+						<td th:text="${counterstaff2.details}"></td>
+						
+						<!-- Actions  -->
+						<td><a th:href="@{/cstaff/edit/{id}(id=${counterstaff2.id})}" class="btn btn-secondary">Edit</a>
+							| <a th:href="@{/cstaff/delete/{id}(id=${counterstaff2.id})}"
+							onclick="return confirm('Are you sure you want to delete counter staff?');" class="btn btn-danger">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="/cstaff/add" class="btn btn-danger w3-button w3-orange">Add
+				Counter Staff</a>
+		</main>
+		<div th:replace="fragments/footer"></div>
+	</div>
+</body>
+</html>
+

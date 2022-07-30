@@ -1,0 +1,123 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, Rabiatul Adawiyah. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Rabiatul Adawiyah
+ * Student ID: 20021900
+ * Class: FYP
+ * 
+ * 
+ */ --> 
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CorpHas- View Managers</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="/bootstrap/css/bootstrap.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 50%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.card-header {
+	background-color: #d9ddf6;
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+	font-weight: 700;
+}
+
+.card-header h3 {
+	font-weight: 700;
+}
+
+
+
+.btn-text-center {
+	text-align: center;
+}
+img {
+	width: 200px;
+	height:200px;
+	float: left;
+}
+
+
+</style>
+
+</head>
+<body style="background-color:#FFFACD;">
+	<div th:replace="fragments/header"></div>
+<div class="container btn-text-center">
+<br>
+	<div class="h1" style= "font-family: 'Georgia', sans-serif;">List of Managers</div>
+				<!-- Search function-->
+			<div>
+				<form th:action="@{/managers}">
+					Search: <input type="text" name="keyword" th:value="${keyword}"
+						required /> &nbsp; <input class="btn btn-primary" type="submit"
+						value="Search" /> &nbsp; <input class="btn btn-warning"
+						type="button" value="Clear" onclick="clearFilter()" />
+				</form>
+
+				<script type="text/javascript">
+					function clearFilter() {
+						window.location = '/managers'; //redirect back to orignal package page
+					}
+				</script>
+			</div>
+			<!-- end Search function-->
+			<br>
+		<div class="row container">
+		
+		<!-- Alert -->
+		<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+		<div class="alert alert-danger" role="alert" th:text="${failed}" th:if="${failed}"></div>
+		<!-- Alert -->
+		
+			<th:block th:each="managers : ${listManagers}">
+				<div class="card">
+					<div class="card-body">
+				<!-- Show details for managers -->
+
+					  <img src="/images/avatar.jpg" alt="Avatar" >
+						<h3 th:text="${managers.id}"></h3>
+						<h3 th:text="${managers.name}"></h3>
+						<h3 th:text="${managers.department}"></h3>
+					
+					<!-- Actions -->
+						<td><a th:href="@{/managers/edit/{id}(id=${managers.id})}"  class="btn btn-secondary">Edit</a> |
+						<a th:href="@{/managers/delete/{id}(id=${managers.id})}"
+							onclick="return confirm('Are you sure you want remove manager?');"
+							id="delete_id"  class="btn btn-danger">Delete</a></td>
+					</div>
+						
+			
+						</div>
+						
+			<div> 
+			<br>
+		
+								</div>
+				</div>
+				
+			</th:block>
+				<a th:href=@{/managers/add} class="btn btn-danger w3-button w3-orange">Add Manager</a>&nbsp;
+						&nbsp;
+			</div>
+		
+	<div th:replace="fragments/footer"></div>
+</body>
+</html> 
+
+

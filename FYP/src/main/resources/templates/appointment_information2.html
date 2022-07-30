@@ -1,0 +1,176 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, 20023609. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Lorraine Lee
+ * Student ID: 20023609
+ * Class: E62F
+ * Date created: 2022-Jul-23 9:49:29 pm 
+ * 
+ */ -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CorpHas</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="/bootstrap/css/bootstrap.js"></script>
+
+
+<style>
+
+/*     .piechart {
+            margin-top: 300px;
+            display: block;
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background-image: conic-gradient(
+                pink 270deg, 
+                lightblue 0 90deg, 
+                orange 0);
+        }
+  
+        body,
+        .piechart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } */
+.btn-text-center {
+	text-align: center;
+}
+
+.center {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+}
+</style>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+google.charts.load('current', {'packages':['corechart']});
+
+	google.charts.setOnLoadCallback(drawPieChart);
+	var month1 = document.getElementById("classicMen").innerHTML;
+	var month2 = document.getElementById("ClassicWomen").innerHTML;
+	var month3 = document.getElementById("EliteMen").innerHTML;
+	var month4 = document.getElementById("EliteWomen").innerHTML;
+	var month5 = document.getElementById("ExclusiveMen").innerHTML;
+	var month6 = document.getElementById("ExclusiveWomen").innerHTML;
+	var month7 = document.getElementById("SignatureMen").innerHTML;
+	var month8 = document.getElementById("SignatureWomen").innerHTML;
+	var month9 = document.getElementById("PremierMen").innerHTML;
+	var month10 = document.getElementById("PremierWomen").innerHTML;
+	var month11 = document.getElementById("PrestigeMen").innerHTML;
+	var month12 = document.getElementById("PrestigeWomen").innerHTML;
+
+	function drawPieChart() {
+
+		   var x = [(${classicMen})];
+			var y = [(${ClassicWomen})];
+			var z = [(${EliteMen})];
+			var a = [(${EliteWomen})];
+			var b = [(${ExclusiveMen})];
+			var c = [(${ExclusiveWomen})];
+			var d = [(${SignatureMen})];
+			var e = [(${SignatureWomen})];
+			var f = [(${PremierMen})];
+			var g = [(${PremierWomen})];
+			var h = [(${PrestigeMen})];
+			var i = [(${PrestigeWomen})]; 
+
+		
+		    var data = google.visualization.arrayToDataTable([
+		     ['Appt', 'Total Count', {role: "style"}],
+		    ['classicMen', x, 'color:#B0C4DE'],
+		    ['ClassicWomen',  y,'color:#ADD8E6'],
+		    ['EliteMen',  z,'color:#B0E0E6'],
+		    ['EliteWomen',  a,'color:#87CEFA'],
+		    ['ExclusiveMen',  b,'color:#87CEEB'], 
+		    ['ExclusiveWomen',  c,'color:#6495ED'], 
+		    ['SignatureMen',  d,'color:#00BFFF'], 
+		    ['SignatureWomen',  e,'color:#1E90FF'], 
+		    ['PremierMen',  f,'color:#4169E1'], 
+		    ['PremierWomen',  g,'color:#0000FF'], 
+		    ['PrestigeMen',  h,'color:#0000CD'], 
+		    ['PrestigeWomen',  i,'color:#00008B'], 
+
+		    ]);
+
+		var options = {
+				  title: 'Total APPT count',
+		          'width':550, 'height':400
+		};
+		
+		 var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
+
+	        chart.draw(data, options);
+	      }
+</script>
+</head>
+<body style="background-color: #FFFACD;">
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+		<main class="btn-text-center">
+			<div class="h1">Appointment count By Month</div>
+			<div class="alert alert-primary " role="alert" th:text="${success}"
+				th:if="${success}"></div>
+			<table class="table table-bordered table-hover btn-text-center">
+				<thead class="table-primary">
+					<tr>
+						<th>Classic Men</th>
+						<th>Classic Women</th>
+						<th>Elite Men</th>
+						<th>Elite Women</th>
+						<th>Exclusive Men</th>
+						<th>Exclusive Women</th>
+						<th>Signature Men</th>
+						<th>Signature Women</th>
+						<th>Premier Men</th>
+						<th>Premier Women</th>
+						<th>Prestige Men</th>
+						<th>Prestige Women</th>
+						<th>Total count</th>
+
+					</tr>
+				</thead>
+				<tbody class="table-light">
+					<tr>
+						<td id="classicMen" th:text="${classicMen}"></td>
+						<!--  <td th:text="${malePercentage}"></td>-->
+
+						<td id="month2" th:text="${ClassicWomen}"></td>
+						<td id="EliteMen" th:text="${EliteMen}"></td>
+						<td id="EliteWomen" th:text="${EliteWomen}"></td>
+						<td id="ExclusiveMen" th:text="${ExclusiveMen}"></td>
+						<td id="ExclusiveWomen" th:text="${ExclusiveWomen}"></td>
+						<td id="SignatureMen" th:text="${SignatureMen}"></td>
+						<td id="SignatureWomen" th:text="${SignatureWomen}"></td>
+						<td id="PremierMen" th:text="${PremierMen}"></td>
+						<td id="PremierWomen" th:text="${PremierWomen}"></td>
+						<td id="PrestigeMen" th:text="${PrestigeMen}"></td>
+						<td id="PrestigeWomen" th:text="${PrestigeWomen}"></td>
+
+						<td th:text="${total}">
+				</tbody>
+			</table>
+			<!--  <a href="#" class="btn btn-danger w3-button w3-orange">Pie Chart</a>-->
+			<br> <br>
+
+			<h1>Bar Chart</h1>
+
+
+			<div id="piechart" class="center"></div>
+
+
+		</main>
+		<div th:replace="fragments/footer"></div>
+	</div>
+</body>
+</html>

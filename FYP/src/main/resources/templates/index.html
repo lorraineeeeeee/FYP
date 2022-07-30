@@ -1,0 +1,140 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, Rabiatul Adawiyah. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Rabiatul Adawiyah, Matthew Ong
+ * Student ID: 20021900,20018528
+ * Class: FYP
+ *
+ * 
+ */ -->
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<style>
+/* * {
+	box-sizing: border-box;
+}
+ */
+.btn-text-center {
+	text-align: center;
+	padding: 10px
+}
+
+.row::after {
+	content: "";
+	clear: both;
+	display: both;
+}
+/* for image to be reponsive */
+/* @media screen and (max-width: 500px) {
+	.column {
+		width: 100%
+	}
+} */
+p {
+	font-size: 50px;
+	text-align: center
+}
+
+footer {
+	position: fixed;
+	padding: 10px 10px 0px 10px;
+	bottom: 0;
+	width: 100%;
+	/* Height of the footer*/
+	height: 50px;
+}
+
+h6 {
+	text-align: center;
+}
+h1 {
+	text-align: center;
+}
+.container{
+background-image:url("images/kv1_1400x799_peh.jpg");
+width: 100%;
+height: 100%;
+object-fit: cover;
+background-attachment: fixed;
+background-size: 100% 100%;
+}
+.button {
+  background-color: black; 
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: orange;
+  color: black;
+}
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+	width: 40%;
+	height:92%;
+	border-radius: 10px; /* 5px rounded corners */
+}
+
+</style>
+
+<title>CorpHas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<!-- Index Page -->
+<body style="background-color: #CCCCFF;">
+	<div>
+		<div>
+			<div th:replace="fragments/header"></div>
+			<div class="container my-5 pt-5 bg-light"
+				style="height: 500px; border-style: inset; border-width: 8px;">
+				<div class="btn-text-center card" >
+				<br><br>
+					<h1 style="font-family: 'Cambria', sans-serif;">
+					Healthy living starts with you!
+				</h1>
+			<br>
+			<br>
+					<a style="text-decoration: none;"
+}
+						type="submit" href="/users/add" class="button button:hover">Register an account</a> OR
+
+					<a sec:authorize="!isAuthenticated()" style="text-decoration: none;"
+						type="submit" href="/login" class="button button:hover">Login</a> 
+						<br>
+						<h6>For enquiries, Email us at corphas@parkwaylab.com</h6>
+
+				</div>
+
+				
+			</div>
+		</div>
+		<div th:replace="fragments/footer"></div>
+
+	</div>
+	<!--End of Index Page  -->
+
+</body>
+</html>
+

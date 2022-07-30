@@ -1,0 +1,178 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, 20023609. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Lorraine Lee
+ * Student ID: 20023609
+ * Class: E62F
+ * Date created: 2022-Jul-21 9:40:31 pm 
+ * 
+ */ -->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CorpHas</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="/bootstrap/css/bootstrap.js"></script>
+
+
+<style>
+
+/*     .piechart {
+            margin-top: 300px;
+            display: block;
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background-image: conic-gradient(
+                pink 270deg, 
+                lightblue 0 90deg, 
+                orange 0);
+        }
+  
+        body,
+        .piechart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } */
+.btn-text-center {
+	text-align: center;
+}
+
+.center {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+}
+</style>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+google.charts.load('current', {'packages':['corechart']});
+
+	google.charts.setOnLoadCallback(drawPieChart);
+	var month1 = document.getElementById("month1").innerHTML;
+	var month2 = document.getElementById("month2").innerHTML;
+	var month3 = document.getElementById("month3").innerHTML;
+	var month4 = document.getElementById("month4").innerHTML;
+	var month5 = document.getElementById("month5").innerHTML;
+	var month6 = document.getElementById("month6").innerHTML;
+	var month7 = document.getElementById("month7").innerHTML;
+	var month8 = document.getElementById("month8").innerHTML;
+	var month9 = document.getElementById("month9").innerHTML;
+	var month10 = document.getElementById("month10").innerHTML;
+	var month11 = document.getElementById("month11").innerHTML;
+	var month12 = document.getElementById("month12").innerHTML;
+
+	function drawPieChart() {
+
+		   var x = [(${month1})];
+			var y = [(${month2})];
+			var z = [(${month3})];
+			var a = [(${month4})];
+			var b = [(${month5})];
+			var c = [(${month6})];
+			var d = [(${month7})];
+			var e = [(${month8})];
+			var f = [(${month9})];
+			var g = [(${month10})];
+			var h = [(${month11})];
+			var i = [(${month12})]; 
+
+		
+		    var data = google.visualization.arrayToDataTable([
+		     ['Appt', 'Total Count', {role: "style"}],
+		    ['JAN', x, 'color:#B0C4DE'],
+		    ['FEB',  y,'color:#ADD8E6'],
+		    ['MAR',  z,'color:#B0E0E6'],
+		    ['APR',  a,'color:#87CEFA'],
+		    ['MAY',  b,'color:#87CEEB'], 
+		    ['JUNE',  c,'color:#6495ED'], 
+		    ['JULY',  d,'color:#00BFFF'], 
+		    ['AUG',  e,'color:#1E90FF'], 
+		    ['SEP',  f,'color:#4169E1'], 
+		    ['OCT',  g,'color:#0000FF'], 
+		    ['NOV',  h,'color:#0000CD'], 
+		    ['DEC',  i,'color:#00008B'], 
+
+		    ]);
+
+		var options = {
+				  title: 'Total APPT count',
+		          'width':550, 'height':400
+		};
+		
+		 var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
+
+	        chart.draw(data, options);
+	      }
+</script>
+</head>
+<body style="background-color: #FFFACD;">
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+		<main class="btn-text-center">
+			<div class="h1">Appointment count By Month</div>
+			<div class="alert alert-primary " role="alert" th:text="${success}"
+				th:if="${success}"></div>
+			<table class="table table-bordered table-hover btn-text-center">
+				<thead class="table-primary">
+					<tr>
+						<th>JAN</th>
+						<th>FEB</th>
+						<th>MAR</th>
+						<th>APR</th>
+						<th>MAY</th>
+						<th>JUNE</th>
+						<th>JUL</th>
+						<th>AUG</th>
+						<th>SEP</th>
+						<th>OCT</th>
+						<th>NOV</th>
+						<th>DEC</th>
+						<th>Total count</th>
+
+					</tr>
+				</thead>
+				<tbody class="table-light">
+					<tr>
+						<td id="month1" th:text="${month1}"></td>
+						<!--  <td th:text="${malePercentage}"></td>-->
+
+						<td id="month2" th:text="${month2}"></td>
+						<td id="month3" th:text="${month3}"></td>
+						<td id="month4" th:text="${month4}"></td>
+						<td id="month5" th:text="${month5}"></td>
+						<td id="month6" th:text="${month6}"></td>
+						<td id="month7" th:text="${month7}"></td>
+						<td id="month8" th:text="${month8}"></td>
+						<td id="month9" th:text="${month9}"></td>
+						<td id="month10" th:text="${month10}"></td>
+						<td id="month11" th:text="${month11}"></td>
+						<td id="month12" th:text="${month12}"></td>
+
+						<td th:text="${total}">
+				</tbody>
+			</table>
+			<!--  <a href="#" class="btn btn-danger w3-button w3-orange">Pie Chart</a>-->
+			<br> <br>
+
+			<h1>Bar Chart</h1>
+
+
+			<div id="piechart" class="center"></div>
+
+
+		</main>
+		<div th:replace="fragments/footer"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, 20023609. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Lorraine Lee
+ * Student ID: 20023609
+ * Class: E62F
+ * Date created: 2022-Jul-21 9:40:31 pm 
+ * 
+ */ -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Google Charts Tutorial</title>
+
+
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+
+<style>
+tr {
+	text-align: center;
+}
+
+th>a {
+	text-decoration: none;
+}
+</style>
+</head>
+<body style="background-color: #FFFACD;">
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+
+		<div class="h1 btn-text-center" style="text-align: center;">All
+			Reports</div>
+		<table class="table table-bordered table-hover btn-text-center"
+			border=1 width=100%>
+			<thead class="table-primary">
+				<tr>
+					<th>Report</th>
+
+
+
+				</tr>
+			</thead>
+
+			<tbody class="table-light">
+               <!-- Lorraine -->
+				<tr>
+					<th><a th:href="@{/information}">Employee Age Range report</a></th>
+				</tr>
+
+				<tr>
+					<th><a th:href="@{/information2}">Appointment By Month</a></th>
+				</tr>
+				<tr>
+					<th><a th:href="@{/information3}">Packages booked</a>
+						<tr>
+						
+						<!-- Matthew -->
+					<th><a th:href="@{/patientsReport/Info1}">Employee Weight Count</a></th>
+				</tr>
+				<tr>
+					<th><a th:href="@{/patientsReport/Info2}">Employee Smoker Percentage</a></th>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>

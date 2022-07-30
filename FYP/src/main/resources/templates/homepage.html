@@ -1,0 +1,139 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, Rabiatul Adawiyah. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Rabiatul Adawiyah, Matthew Ong
+ * Student ID: 20021900, 20018528
+ * Class: FYP
+ * 
+ * 
+ */ -->
+
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<title>CorpHas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<head>
+</head>
+
+<style>
+.btn-text-center {
+	text-align: center;
+	padding: 10px
+}
+
+.row::after {
+	content: "";
+	clear: both;
+	display: both;
+}
+p {
+	font-size: 50px;
+	text-align: center
+}
+
+footer {
+	position: fixed;
+	padding: 10px 10px 0px 10px;
+	bottom: 0;
+	width: 100%;
+	/* Height of the footer*/
+	height: 50px;
+}
+
+h5 {
+	text-align: center;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border:2px solid black;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+.container{
+background-image:url("images/banner-bg.jpg");
+width: 100%;
+height: 100%;
+object-fit: cover;
+background-attachment: fixed;
+background-size: 100% 100%;
+
+}
+.container2{
+ text-align: center;
+width: 100%;
+height: 100%;
+object-fit: cover;
+background-attachment: fixed;
+background-size: 100% 100%;
+
+}
+</style>
+	<!-- Home Page -->
+<body  style="background-color: #CCCCFF;">
+	<div th:replace="fragments/header"></div>
+	
+	<div>
+		<div>
+	
+		<br>
+
+
+			<div class="container my-5 pt-5 bg-light"
+				style="height: 500px; border-style: solid;">
+
+				<!-- to make the buttons and words be in the center (move downwards) -->
+				<p>
+					<b  style="font-family:	Times New Roman;">Healthy living starts with you!</b>
+				</p>
+				<br />
+				<!--Home Page for Counterstaff and User  -->
+				<p style="font-size: 40px;" sec:authorize="hasAnyRole('COUNTERSTAFF','USER')">-Make an Appointment-</p>
+				
+			<!--Home Page for HR Admin  -->
+			<p style="font-size: 40px; font-family: 'Poppins', sans-serif; color:#dc4d01;" sec:authorize="hasRole('HR')">- Corporate Health Screening -</p>
+			
+			<!--Home Page for Admin -->
+			<p style="font-size: 50px;" sec:authorize="hasRole('ADMIN')">-Parkway Admin-</p>
+			
+			<div class="btn-text-center ">
+					<a class="button button:hover" type="submit" href="/survey/start" sec:authorize="hasAnyRole('COUNTERSTAFF','USER')">Schedule
+						an appointment</a> 
+						
+					<a class="button button:hover" type="submit" href="/WIpatients" sec:authorize="hasRole('COUNTERSTAFF')">Walk In Patients</a>
+						<br /> <br /> <br />
+
+				</div>
+
+				<h5>For enquiries, Email us at <u>corphas@parkwaylab.com</u></h5>
+			</div>
+		</div>
+		
+
+	</div>
+	<!-- End of Home Page -->
+<div th:replace="fragments/footer"></div>
+</body>
+</html>
+

@@ -1,0 +1,146 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, Rabiatul Adawiyah. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Rabiatul Adawiyah
+ * Student ID: 20021900
+ * Class: FYP
+ * 
+ */ -->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CorpHas- View Appointment</title>
+<meta name="viewport" content="width=device-width , initial-scale= 1">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<script src="/bootstrap/css/bootstrap.js"></script>
+<style>
+.btn-text-center {
+	text-align: center;
+}
+</style>
+</head>
+<body style="background-color: #FFFACD;">
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+		<br>
+		<div class="h1 btn-text-center"
+			style="font-family: 'Georgia', sans-serif;">All Appointments</div>
+		<!-- Search function-->
+		<div class="search btn-text-center">
+			<form th:action="@{/appt}">
+				Search: <input type="text" name="keyword" th:value="${keyword}"
+					required /> &nbsp; <input class="btn btn-primary" type="submit"
+					value="Search" /> &nbsp; <input class="btn btn-warning"
+					type="button" value="Clear" onclick="clearFilter()" />
+			</form>
+
+			<script type="text/javascript">
+				function clearFilter() {
+					window.location = '/appt'; //redirect back to orignal company page
+				}
+			</script>
+
+		</div>
+
+		<!-- end Search function-->
+		<br>
+   		<!--Alert-->
+		<div class="alert alert-primary btn-text-center" role="alert" th:text="${success}"
+			th:if="${success}" ></div>
+		<div class="alert alert-danger btn-text-center" role="alert" th:text="${failed}"
+			th:if="${failed}"></div>
+		<!--Alert-->
+		
+		<!-- View Appointment Details -->
+		<table class="table table-bordered table-hover btn-text-center"
+			border=1 width=100%>
+			<!-- Table Header -->
+			<thead class="table-primary"
+				style="font-family: 'Cambria', sans-serif;">
+				<tr>
+					<th>APPOINTMENT ID</th>
+					<th>NRIC & EMPLOYEE ID</th>
+					<th>Date/Time</th>
+					<th sec:authorize="hasRole('USER')">Location</th>
+					<th>Choosen Package</th>
+					<th>Employee Type</th>
+					<th>Status</th>
+					<th sec:authorize="hasRole('ADMIN')"></th>
+
+					<th></th>
+					<th sec:authorize="hasRole('COUNTERSTAFF')"></th>
+					<th sec:authorize="hasRole('COUNTERSTAFF')"></th>
+				</tr>
+			</thead>
+			<!-- Table Data   -->
+			<tbody class="table-light">
+				<th:block th:each="appointment: ${listAppt}">
+					<tr>
+						<!-- Shows Appointment id, Patient nric and employee id -->
+						<td><a th:text="${appointment.id }"
+							th:href="@{appt/{apptid}(apptid=${appointment.id})}"> </a><br>
+							<!-- href : links to view single appt -->
+						<td><span th:text="${appointment.nric}"></span> | <span
+							th:text="${appointment.employeeid }"></span></td>
+
+						<!-- Shows Appointment details-->
+
+						<td>
+							<p th:text="${appointment.date}"></p>
+							<p th:text="${appointment.timesch.time}"></p>
+						<td th:text="${appointment.location}"
+							sec:authorize="hasRole('USER')"></td>
+						<td th:text="${appointment.packages.pname}"></td>
+						<td th:text="${appointment.emptype.emptype}"></td>
+						<td th:text="${appointment.status}"
+							th:styleappend="${appointment.status=='Booked' ? 'background-color:rgba(102, 102, 255, 0.7)': appointment.status=='Cancelled' ? 'background-color:rgba(255, 38, 0, 0.7)' : appointment.status=='Completed' ? 'background-color:rgba(0, 255, 40, 0.7)' : '#fffff'}"></td>
+						<!-- Background color changes by status  -->
+
+						<!-- Reschedule Appointment -->
+						<td><a
+							th:href="@{/appt/reschedule2/{id}(id=${appointment.id})}"
+							sec:authorize="hasRole('COUNTERSTAFF')"
+							th:if="${appointment.status!='Cancelled'} and ${appointment.status!='Completed'}"
+							class="btn btn-primary">Reschedule Appt</a></td>
+
+						<!-- Cancel Appointment -->
+
+						<td><a th:href="@{/appt/cancel/{id}(id=${appointment.id})}"
+							onclick="return confirm('Are you sure you want to CANCEL APPOINTMENT?');"
+							id="delete_id"
+							th:if="${appointment.status!='Cancelled'} and ${appointment.status!='Completed'}" sec:authorize="hasRole('COUNTERSTAFF')"
+							class="btn btn-danger">Cancel</a><br>
+						<br> <!-- Appointment Completed --> <a
+							th:href="@{/appt/completed/{id}(id=${appointment.id})}"
+							onclick="return confirm('Appointment Completed?');"
+							id="delete_id"
+							th:if="${appointment.status!='Completed'} and ${appointment.status!='Cancelled'}" sec:authorize="hasRole('COUNTERSTAFF')"
+							class="btn btn-success">Completed</a>
+						<!-- 	<a
+							th:href="@{/appt/payment/{id}(id=${appointment.id})}"
+							onclick="return confirm('Payment Completed?');"
+							id="delete_id"
+							th:if="${appointment.paid!='paid'}">Paid</a> --></td>
+
+						<!--Test Report-->
+						<td sec:authorize="hasRole('COUNTERSTAFF')"><a
+							th:href="@{/testresults/add/{id}(id=${appointment.id})}"
+							th:if="${appointment.status!='Cancelled'}" class="btn btn-light"
+							sec:authorize="hasRole('COUNTERSTAFF')">Upload Test Report</a></td>
+
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+
+		<footer>
+
+			<div th:replace="fragments/footer"></div>
+
+		</footer>
+	</div>
+</body>
+</html>

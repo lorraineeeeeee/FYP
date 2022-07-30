@@ -1,0 +1,157 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, 20023609. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Lorraine Lee
+ * Student ID: 20023609
+ * Class: E62F
+ * Date created: 2022-Jul-21 9:40:31 pm 
+ * 
+ */ -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CorpHas</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="/bootstrap/css/bootstrap.js"></script>
+
+
+<style>
+
+/*     .piechart {
+            margin-top: 300px;
+            display: block;
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background-image: conic-gradient(
+                pink 270deg, 
+                lightblue 0 90deg, 
+                orange 0);
+        }
+  
+        body,
+        .piechart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } */
+.btn-text-center {
+	text-align: center;
+}
+
+.center {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+}
+</style>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">  		
+   
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+       	var Total18s = document.getElementById("Total18s").innerHTML;
+		var Total30s = document.getElementById("Total30s").innerHTML;
+		var Total40s = document.getElementById("Total40s").innerHTML;
+		var Total50s = document.getElementById("Total50s").innerHTML;
+		var Total60s = document.getElementById("Total60s").innerHTML;
+
+      function drawChart() {
+    	  
+  		var x = [(${Total18s})];
+  		var y = [(${Total30s})];
+  		var z = [(${Total40s})];
+  		var a = [(${Total50s})];
+  		var b = [(${Total60s})];
+
+		
+        var data = google.visualization.arrayToDataTable([
+          ['Age', 'Total Count'],
+          ['18-29', x],
+          ['30-39',  y],
+          ['40-49',  z],
+          ['50-59',  a],
+          ['60-69',  b],
+
+        ]);
+
+        var options = {
+          title: 'Total Age count',
+          'width':550, 'height':400
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+</head>
+<body style="background-color: #FFFACD;">
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+		<main class="btn-text-center">
+			<div class="h1">Employee Age count</div>
+			<div class="alert alert-primary " role="alert" th:text="${success}"
+				th:if="${success}"></div>
+			<table class="table table-bordered table-hover btn-text-center"
+				id="mytable">
+				<thead class="table-primary">
+					<tr>
+						<th>18-29</th>
+						<th>30-39</th>
+						<th>40-49</th>
+						<th>50-59</th>
+						<th>60 and above</th>
+						<th>Total count</th>
+
+					</tr>
+				</thead>
+				<tbody class="table-light">
+					<tr>
+						<td id="Total18s" th:text="${Total18s}"></td>
+						<!--  <td th:text="${malePercentage}"></td>-->
+
+						<td id="Total30s" th:text="${Total30s}"></td>
+						<td id="Total40s" th:text="${Total40s}"></td>
+						<td id="Total50s" th:text="${Total50s}"></td>
+						<td id="Total60s" th:text="${Total60s}"></td>
+
+						<td th:text="${total}">
+				</tbody>
+			</table>
+			<!--  <a href="#" class="btn btn-danger w3-button w3-orange">Pie Chart</a>-->
+			<br> <br>
+			<button onclick="toggle(this);">Hide Table</button>
+			<h1>Pie Chart</h1>
+
+
+			<div id="piechart" class="center"></div>
+
+
+		</main>
+		<script> 
+		let toggle = button => { 
+			let element = document.getElementById("mytable"); 
+			let hidden = element.getAttribute("hidden"); 
+			if (hidden) {
+		element.removeAttribute("hidden"); 
+		button.innerText = "Hide table"; 
+		}
+		else { 
+			element.setAttribute("hidden", "hidden"); 
+			button.innerText = "Show table"; } 
+			} 
+		</script>
+		<div th:replace="fragments/footer"></div>
+	</div>
+</body>
+</html>

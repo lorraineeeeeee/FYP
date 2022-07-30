@@ -1,0 +1,100 @@
+<!-- 
+/**
+ * 
+ * I declare that this code was written by me, 20018528. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Matthew Ong
+ * Student ID: 20018528
+ * Class: FYP
+ * Date created: 2022-May-04 00:42:50 pm
+ * 
+ */ -->
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Google Charts Tutorial</title>
+<meta charset="UTF-8">
+
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+     
+      </head>
+ <body style="background-color:#FFFACD;">
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+		<main class="btn-text-center">
+			<div class="h1">Employee Weight Count</div>
+			<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+			<table class="table table-bordered table-hover btn-text-center">
+				<thead class="table-primary">
+					<tr>
+						<th>Under weight total</th>
+						<th>Healthy weight total</th>
+						<th>Overweight total</th>
+						<th>Obese total</th>
+						<th>Total count</th>
+
+					</tr>
+				</thead>
+				<tbody class="table-light">
+					<tr>
+						<td id="totalUnderWeight" th:text="${totalUnderWeight}"></td>					
+						<td id="healthyWeightTotal" th:text="${totalHealthyWeight}"></td>
+						<td id="totalOverWeight" th:text="${totalOverWeight}">
+						<td id="totalObese" th:text="${totalObese}">
+						<td th:text="${total}">
+				</tbody>
+			</table>
+			</main>
+			<!--  <a href="#" class="btn btn-danger w3-button w3-orange">Pie Chart</a>--><br><br>
+			
+			    <h1>Bar Chart</h1>
+			    
+
+		<div id="barchart" style = "width: 550px; height: 400px; margin: 0 auto">
+      </div>
+           <script type="text/javascript">
+                
+            google.charts.load('current', {packages: ['corechart']});
+            google.charts.setOnLoadCallback(drawChart);   
+            
+    	var UW = document.getElementById("totalUnderWeight").innerHTML;
+		var HW = document.getElementById("totalHealthyWeight").innerHTML;
+      	var OW = document.getElementById("totalOverWeight").innerHTML;
+		var OB = document.getElementById("totalObese").innerHTML;
+		
+         function drawChart() {
+            // Define the chart to be drawn.
+  
+            
+        var UW = [(${totalUnderWeight})];
+  		var HW = [(${totalHealthyWeight})];
+  		var OW = [(${totalOverWeight})];
+  		var OB = [(${totalObese})];
+  		
+            var data = google.visualization.arrayToDataTable([
+               ['Patients', 'Weight category', { role: "style" }],
+               ['Under weight',  UW, 'color: #b87333'],
+               ['Healthy',  HW, 'color: #21cfed'],
+               ['Overweight',  OW, 'color: #f5b114'],
+               ['Obese',  OB, 'color: #f54114'],
+            ]);
+
+            var options = {title: 'Patient weight chart', vAxis: {format:'0'}}; 
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('barchart'));
+            chart.draw(data, options);
+         }
+         
+      </script>
+  
+			
+			
+		
+		<div th:replace="fragments/footer"></div>
+	</div>
+</body>
+</html>

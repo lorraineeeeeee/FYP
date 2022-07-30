@@ -1,0 +1,83 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, Rabiatul Adawiyah. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Rabiatul Adawiyah
+ * Student ID: 20021900
+ * Class: FYP
+ * 
+ * 
+ */ -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.btn-text-center {
+	text-align: center;
+}
+
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+	width: 30%;
+	border-radius: 10px; /* 5px rounded corners */
+}
+
+.card:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+	padding: 2px 16px;
+}
+</style>
+</head>
+<body style="background-color: #CCCCFF;">
+	<div th:replace="fragments/header"></div>
+	<br>
+	<!-- View Account Details-->
+	<h1 class="btn-text-center" style="font-family: 'Cambria', sans-serif;">Your
+		Account Details</h1>
+	<div class="container col d-flex justify-content-center">
+		<div class="card " style="border-radius: 30px;">
+			<img src="images/avatar.jpg" alt="Avatar"
+				style="width: 100%; border-radius: 30px;">
+			<div class="container btn-text-center">
+				<!-- Shows Account profile details -->
+				<tr th:each="corpuser : ${listUser}">
+
+					<h4 th:text="${corpuser.name}">
+
+						<b></b>
+					</h4>
+					<p>
+						@<span th:text="${corpuser.username}"></span>
+					</p>
+					<p>
+					<b>
+						<span th:text="${corpuser.corpid}"></span> ||
+						<span th:text="${corpuser.empid}"></span> </b>
+					</p>
+					</p>
+					<p th:text="${corpuser.email}"></p>
+					<p sec:authorize="hasAnyRole('COUNTERSTAFF','ADMIN','HR')" th:text="${corpuser.role}"></p>
+
+					<!-- To maintain profile -->
+					<a th:href="@{/users/edit2/{id}(id=${corpuser.id})}"
+						class="btn btn-warning">Maintain profile details</a>
+				</tr>
+				</p>
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+<div th:replace="fragments/footer"></div>
+</html>

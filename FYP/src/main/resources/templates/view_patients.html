@@ -1,0 +1,113 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, Rabiatul Adawiyah. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Rabiatul Adawiyah
+ * Student ID: 20021900
+ * Class: FYP
+ * 
+ * 
+ */ -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CorpHas-Patients</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="/bootstrap/css/bootstrap.js"></script>
+<style>
+.btn-text-center {
+	text-align: center;
+}
+
+table {
+	width: 100%;
+}
+</style>
+</head>
+<body style="background-color: #FFFACD;">
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+		<br>
+		<main class="btn-text-center">
+
+			<div class="h1" style="font-family: 'Georgia', sans-serif;">All
+				Patients</div>
+			<br>
+			<!-- Search function-->
+			<div>
+				<form th:action="@{/patients}">
+					Search: <input type="text" name="keyword" th:value="${keyword}"
+						required /> &nbsp; <input class="btn btn-primary" type="submit"
+						value="Search" /> &nbsp; <input class="btn btn-warning"
+						type="button" value="Clear" onclick="clearFilter()" />
+				</form>
+
+				<script type="text/javascript">
+					function clearFilter() {
+						window.location = '/patients'; //redirect back to orignal package page
+					}
+				</script>
+			</div>
+			<!-- end Search function-->
+			<br>
+
+			<div class="alert alert-primary " role="alert" th:text="${success}"
+				th:if="${success}"></div>
+			<div class=" table-responsive">
+				<table class="table table-bordered table-hover btn-text-center container"
+					style="font-family: 'Cambria', sans-serif; overflow: auto; width:95%;">
+					<!-- Table Header -->
+					<thead class="table-primary ">
+						<tr>
+							<th hidden>ID</th>
+							<th>NRIC</th>
+							<th>Full Name</th>
+							<th>DOB</th>
+							<th>Gender</th>
+							<th>Contact Number</th>
+							<th>Emergency Contact</th>
+							<th>Medical Condition</th>
+							<th></th>
+
+
+						</tr>
+					</thead>
+					<tbody>
+						<!-- Table Data -->
+						<tr th:each="patient : ${listPatient}"
+							style="font-family: 'Poppins', sans-serif;">
+							<!-- Shows Patient Details -->
+							<td  th:text="${patient.id}" hidden></td>
+							<td> <a th:text="${patient.nric}" th:href="@{patients/{listPatientid}(listPatientid=${patient.id})}"></a></td>
+							<td><span th:text="${patient.firstName}"></span> <span
+								th:text="${patient.lastName}"> </span></td>
+							<td th:text="${patient.DOB}"></td>
+							<td th:text="${patient.sex}"></td>
+							<td th:text="${patient.contactNo}"></td>
+							<td ><span th:text="${patient.econtactNo}"></span>,
+							<span th:text="${patient.rs}"></span></td>
+							<td th:text="${patient.medicalCondition}"></td>
+
+							<!-- Actions -->
+							<td><a th:href="@{/patients/edit/{id}(id=${patient.id})}"
+								class="btn btn-secondary">Edit</a><br> <br> <a
+								th:href="@{/patients/delete/{id}(id=${patient.id})}"
+								onclick="return confirm('Are you sure you want to REMOVE PATIENT?');"
+								class="btn btn-danger">Delete</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<a href="/patients/add" class="btn btn-danger w3-button w3-orange">Add
+				Patient</a><br> <br>
+		</main>
+
+		<div th:replace="fragments/footer"></div>
+	</div>
+</body>
+</html>
+

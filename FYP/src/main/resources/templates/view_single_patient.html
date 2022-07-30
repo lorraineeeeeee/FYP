@@ -1,0 +1,118 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, Rabiatul Adawiyah. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Rabiatul Adawiyah
+ * Student ID: 20021900
+ * Class: FYP
+ * 
+ * 
+ */ -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CorpHas-Patients</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="/bootstrap/css/bootstrap.js"></script>
+<style>
+.btn-text-center {
+	text-align: center;
+}
+
+
+.table{
+width:50%;
+}
+
+</style>
+</head>
+<body style="background-color: #FFFACD;">
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+		<br>
+		<main class="btn-text-center">
+
+			<div class="h1" style="font-family: 'Georgia', sans-serif;">
+				Patient Details</div>
+
+			<div class="alert alert-primary " role="alert" th:text="${success}"
+				th:if="${success}"></div>
+	
+				<table class="table table-bordered container" th:each="patient : ${listPatient}" style="text-align:center; width:50%; background:white;">
+					<tr>
+						<th style="background:pink;"></th>
+						<th style="background:pink;" ><u>Details</u></th>
+					</tr>
+					<tr>
+						<td><b>ID:</b></td>
+						<td th:text="${patient.id}"></td>
+					</tr>
+					<tr>
+						<td><b>NRIC:</b></td>
+						<td th:text="${patient.nric}"></td>
+					</tr>
+
+					<tr>
+						<td><b>Full Name:</b></td>
+						<td><span th:text="${patient.firstName}"></span> <span
+								th:text="${patient.lastName}"> </span></td>
+					</tr>
+					<tr>
+						<td><b>Date Of Birth:</b></td>
+						<td th:text="${patient.DOB}"></td>
+					</tr>
+					<tr>
+						<td><b>Gender:</b></td>
+						<td th:text="${patient.sex}"></td>
+					</tr>
+					<tr>
+						<td><b>Contact Number:</b> </td>
+						<td th:text="${patient.contactNo}"></td>
+					</tr>
+					<tr>
+						<td><b>Email:</b></td>
+						<td th:text="${patient.email}"></td>
+					</tr>
+					<tr>
+						<td ><b>Emergency Contact & Relationship:</b></td>
+						<td><span th:text="${patient.econtactNo}"></span>
+						<span th:text="${patient.rs}"></span>
+						</td>
+					</tr>
+					
+						<tr>
+						<td ><b>Street Address:</b></td>
+						<td th:text="${patient.streetAddr}">
+						</td>
+					</tr>
+					
+							<tr>
+						<td ><b>Postal Code:</b></td>
+						<td th:text="${patient.postalCode}">
+						</td>
+					</tr>
+							<tr>
+						<td ><b>Marital Status: </b></td>
+						<td th:text="${patient.ms.ms}">
+						</td>
+					</tr>
+								<tr>
+						<td ><b>Medical Condition: </b></td>
+						<td th:text="${patient.medicalCondition}">
+						</td>
+					</tr>
+					
+				</table>
+		
+	
+		</main>
+
+		<div th:replace="fragments/footer"></div>
+	</div>
+</body>
+</html>
+

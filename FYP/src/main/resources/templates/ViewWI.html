@@ -1,0 +1,113 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, 20008933. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Samia Afrin
+ * Student ID: 20008933
+ * Class: FYP
+ * Date created: 2022-May-04 02:02:18 
+ * 
+ */ -->
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<style>
+/* * {
+	box-sizing: border-box;
+}
+ */
+.btn-text-center {
+	text-align: center;
+	padding: 10px
+}
+
+.row::after {
+	content: "";
+	clear: both;
+	display: both;
+}
+/* for image to be reponsive */
+/* @media screen and (max-width: 500px) {
+	.column {
+		width: 100%
+	}
+} */
+p {
+	font-size: 50px;
+	text-align: center
+}
+
+footer {
+	position: fixed;
+	padding: 10px 10px 0px 10px;
+	bottom: 0;
+	width: 100%;
+	/* Height of the footer*/
+	height: 50px;
+}
+
+h6 {
+	text-align: center;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
+</style>
+
+<title>CorpHas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="background-color: lightblue;">
+	<div>
+		<div>
+			<div th:replace="fragments/header"></div>
+			<div class="container my-5 pt-5 bg-light"
+				style="height: 500px; border-style: solid;">
+
+				<!-- to make the buttons and words be in the center (move downwards) -->
+				<p>
+					<b>Walk-In Patients</b>
+				</p>
+				<br /> <br />
+				<p
+					style="font-size: 40px; border-style: solid; border-width: 1px; margin-left: 70px;">
+					Register Walk-In | Schedule Appointment</p>
+
+				<div class="btn-text-center">
+					<br /> <br /> <br /> <a href="/WIpatients/add"
+						class="btn btn-danger w3-button w3-orange">Add Walk-In Patient</a>
+						&nbsp;&nbsp;
+					<a class="btn btn-danger w3-button w3-orange" type="submit"
+						href="/survey2/start">Schedule an appointment</a>
+
+
+				</div>
+			</div>
+			<div th:replace="fragments/footer"></div>
+
+		</div>
+	</div>
+
+</body>
+</html>
+

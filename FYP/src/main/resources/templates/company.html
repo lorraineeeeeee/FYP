@@ -1,0 +1,226 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, 20023609. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Lorraine Lee
+ * Student ID: 20023609
+ * Class: E62F
+ * Date created: 2022-Jul-21 9:40:31 pm 
+ * 
+ */ -->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+
+<title>Corphas- View List of Companies</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="/font-awesome/css/fontawesome.min.css" rel="stylesheet" />
+<link href="/font-awesome/css/brands.min.css" rel="stylesheet" />
+<link href="/font-awesome/css/solid.min.css" rel="stylesheet" />
+<script src="js/sweetalert2.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+
+
+
+
+</head>
+<style id='global-styles-inline-css'>
+a {
+	text-decoration: none;
+}
+
+.h1 {
+	text-align: center;
+}
+
+.container {
+	height: 200px;
+	padding-top: 100px;
+}
+
+#btn {
+	font-size: 25px;
+}
+
+.containerSubmit {
+	text-align: center;
+}
+
+.search {
+	text-align: center;
+}
+
+/* Style buttons */
+.button {
+	border: none; /* Remove borders */
+	color: black; /* White text */
+	padding: 12px 16px; /* Some padding */
+	font-size: 16px; /* Set a font size */
+	cursor: pointer;
+	border: none; /* Mouse pointer on hover */
+}
+
+.button:hover {
+	background-color: slateblue;
+}
+
+table, th {
+	background-color: lightblue;
+	padding: 10px;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+* {
+	box-sizing: border-box
+}
+/* Style the counter cards */
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	/* this adds the "card" effect*/
+	padding: 0px; /*This changes the position of info in the card*/
+	text-align: center;
+	background-color: #f1f1f1;
+	margin-top: 70px;
+	width: 340px;
+	height: 340px;
+	margin-right: 122px;
+	margin-left: 100px;
+}
+
+.card-header {
+	background-color: #d9ddf6;
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+	font-weight: 700;
+}
+
+.card-header h4 {
+	font-weight: 700;
+}
+
+.card-header a {
+	color: Black;
+	font-family: Roboto, Helvetica, Arial, sans-serif;
+	background-color: transparent;
+	text-decoration: none;
+}
+
+.card-header a:hover {
+	color: Black;
+	font-family: Roboto, Helvetica, Arial, sans-serif;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+.card-header1 {
+	background-color: #d9f6e3;
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+.bb {
+	text-align: center;
+}
+
+.img1 img {
+	width: 50%;
+	height: 400px;
+	float: left;
+}
+
+.container-fluid {
+	width: 100%;
+	max-width: none;
+	padding-left: 0;
+	padding-right: 0
+}
+
+.container-fluid a {
+	text-align: justify;
+}
+
+.text h5 {
+	color: grey
+}
+</style>
+
+<div th:replace="fragments/header"></div>
+<br>
+<div class="container-fluid">
+	<div class="img1">
+		<img class="image" src="images/company.jpg" />
+		<div class="text">
+
+			&nbsp;
+			<h2>Partnership</h2>
+			&nbsp;
+			<h5>
+				&nbsp; These Are The List Of Company pairing With Us For Health
+				Screening Packages.<br> <br> &nbsp;Click On the Company
+				Name To Find Out More About Each Company.<br>
+			</h5>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="container">
+	<body class="bb" style="background-color: #FFFACD;">
+		<!-- Search function-->
+		<div class="search">
+			<form th:action="@{/company}">
+				Search: <input type="text" name="keyword" th:value="${keyword}"
+					required /> &nbsp; <input class="btn btn-primary" type="submit"
+					value="Search" /> &nbsp; <input class="btn btn-warning"
+					type="button" value="Clear" onclick="clearFilter()" />
+			</form>
+
+			<script type="text/javascript">
+				function clearFilter() {
+					window.location = '/company'; //redirect back to orignal company page
+				}
+			</script>
+			
+		</div>
+
+		<!-- end Search function-->
+<br><br><br><br>
+		<div class="h1">Corporates</div>
+		<br>
+		<br>
+		<th:block th:each="company : ${listcompany}">
+			<div class="card-header">
+			<!-- 	<p>Click on the Company name to know more about the company!</p> -->
+				<a th:text=${company.name}
+					th:href="@{/company/{id}(id=${company.id})}"> </a>
+			</div>
+			<div class="card-header1">
+				<p th:text=${company.email}></p>
+			</div>
+		</th:block>
+
+
+		</table>
+		<br>
+		<div class="containerSubmit">
+			<a class="btn btn-primary" href="/company/add" sec:authorize="hasRole('ADMIN')">ADD COMPANY</a>
+		</div>
+		<div th:replace="fragments/footer"></div>
+</div>
+</body>
+
+
+</html>

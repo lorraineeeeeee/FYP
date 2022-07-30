@@ -1,0 +1,99 @@
+<!-- /**
+ * 
+ * I declare that this code was written by me, Rabiatul Adawiyah. 
+ * I will not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: Rabiatul Adawiyah
+ * Student ID: 20021900
+ * Class: FYP
+ * 
+ * 
+ */ -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CorpHas</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="/bootstrap/css/bootstrap.js"></script>
+<style>
+.btn-text-center {
+	text-align: center;
+}
+</style>
+</head>
+<body style="background-color: #FFFACD;">
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+	<br>
+		<main class="btn-text-center">
+			<div class="h1" style= "font-family: 'Georgia', sans-serif;">List Of Employee</div>
+			<!-- Search function-->
+			<div>
+				<form th:action="@{/employee}">
+					Search: <input type="text" name="keyword" th:value="${keyword}"
+						required /> &nbsp; <input class="btn btn-primary" type="submit"
+						value="Search" /> &nbsp; <input class="btn btn-warning"
+						type="button" value="Clear" onclick="clearFilter()" />
+				</form>
+
+				<script type="text/javascript">
+					function clearFilter() {
+						window.location = '/employee'; //redirect back to orignal package page
+					}
+				</script>
+			</div>
+			<!-- end Search function-->
+			<br>
+			
+			<!--Alert -->
+			<div class="alert alert-primary " role="alert" th:text="${success}"
+				th:if="${success}"></div>
+			<div class="alert alert-danger" role="alert" th:text="${failed}" th:if="${failed}"></div>
+			<!--Alert -->
+			
+			
+			<table class="table table-bordered table-hover btn-text-center" style= "font-family: 'Poppins', sans-serif;">
+			<!-- Table Header  -->
+				<thead class="table-primary ">
+					<tr>
+						<th>ID</th>
+						<th>NRIC</th>
+						<th>Name</th>
+						<th>DOB</th>
+						<th>Phone Number</th>
+						<th>Email</th>
+						<th>Type</th>
+						<th sec:authorize="hasAnyRole('ADMIN','HR')">Action</th>
+					</tr>
+				</thead>
+				<!-- Table Data  -->
+				<tbody>
+					<tr th:each="employee : ${listEmployee}" style= "font-family: 'Cambria', sans-serif;">
+					<!-- Show Employee Details -->
+						<td th:text="${employee.id}"></td>
+							<td th:text="${employee.nric}"></td>
+						<td ><span th:text="${employee.name}"></span> [<span th:text="${employee.gender}"></span>]
+						</td>
+						<td th:text="${employee.DOB}"></td>
+						<td th:text="${employee.phoneNo}"></td>
+						<td th:text="${employee.email}"></td>
+						<td th:text="${employee.emptype.emptype}"></td>
+						
+					<!-- Actions -->
+						<td sec:authorize="hasAnyRole('ADMIN','HR')"><a th:href="@{/employee/edit/{id}(id=${employee.id})}" class="btn btn-secondary" sec:authorize="hasAnyRole('ADMIN','HR')">Edit</a>
+							| <a th:href="@{/employee/delete/{id}(id=${employee.id})}" onclick="return confirm('Are you sure you want to REMOVE EMPLOYEE?');" class="btn btn-danger" sec:authorize="hasAnyRole('ADMIN','HR')">Remove Employee</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="/employee/add" class="btn btn-danger w3-button w3-orange">Add
+				Employee</a><br>
+			<br>
+		</main>
+		<div th:replace="fragments/footer"></div>
+	</div>
+</body>
+</html>
+

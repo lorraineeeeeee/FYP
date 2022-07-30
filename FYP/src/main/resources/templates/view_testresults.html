@@ -1,0 +1,125 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>CorpHAS - View Items in Package</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<script src="/bootstrap/css/bootstrap.js"></script>
+
+
+<style>
+@media print {
+	.noprint {
+		/*print only the test name and results rows, remove the id and action when print*/
+		display: none !important;
+	}
+	.align {
+		margin-top: 10mm;
+	}
+	body {
+		margin: 5m;
+	}
+}
+</style>
+
+</head>
+<body style="background-color: #9dbdfc;">
+	<div class="noprint">
+		<div th:replace="fragments/header"></div>
+	</div>
+	<div class="container aligntop">
+		<br> <br>
+
+		<h1 class="text-center">Medical Report</h1>
+
+
+		<br>
+		<tr th:each="test_results,iterStat : ${trList}"
+			th:if="${iterStat.index} <1">
+
+			<div class="h1">
+				<h5  th:text= "${'Appointment ID: ' +test_results.appointment.id}"></h5>
+			
+				<h5 th:text="${'Patient Name: ' + test_results.appointment.name}"></h5>
+				
+				<h5 th:text="${'Appointment Date: ' + test_results.appointment.date}"></h5>
+		</tr>
+	</div>
+	<br>
+
+
+	<table class="table table-bordered table-hover" style="width: 100%;">
+		<thead class="table-primary">
+
+
+			<tr>
+
+
+				<th class="noprint" hidden>Test ID</th>
+
+				<th>Test Name</th>
+				<th>Test Result</th>
+				<th>Remarks</th>
+				<th colspan=2 sec:authorize="hasRole('COUNTERSTAFF')" class="noprint">Action</th>
+
+			</tr>
+
+
+		</thead>
+		<tbody class="bg-light">
+
+			<tr th:each="test_results : ${trList}">
+				<td class="noprint" th:text="${test_results.id}" hidden></td>
+				<td th:text="${test_results.items.name}"></td>
+				<td th:text="${test_results.result} + ${test_results.unit}"></td>
+				<td th:text="${test_results.comment}"></td>
+
+
+
+
+				<td sec:authorize="hasRole('COUNTERSTAFF')" class="noprint"><a
+					th:href=@{/testresults/edit/{id}(id=${test_results.id})}
+					class="btn btn-primary">Update</a></td>
+				<td sec:authorize="hasRole('COUNTERSTAFF')" class="noprint"><a
+					th:href="@{/testresults/delete/{id}(id=${test_results.id})}"
+					onclick="return confirm('Are you sure you want to delete this item?');"
+					id="delete_id" class="btn btn-danger ">Delete</a></td>
+			</tr>
+
+
+
+
+		</tbody>
+	</table>
+	<div class="text-center">
+		<button id="btn-print"
+			class="btn btn-warning justify-content-center noprint"
+			onclick="printPDF()">
+			<b>Print PDF</b>
+		</button>
+	</div>
+	<iframe id="frame" style="width: 100%; border: 0; height: 0"
+		th:src="@{/testresults/appt/{id}(id=${appointment.apptid})+'.html'}"></iframe>
+	</div>
+
+	<script
+		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+			integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script> -->
+
+
+	<script>
+		function printPDF() {
+
+			window.print();
+		};
+	</script>
+</body>
+</html>
